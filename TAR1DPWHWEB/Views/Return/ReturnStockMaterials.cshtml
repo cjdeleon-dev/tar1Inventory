@@ -1,0 +1,293 @@
+﻿
+
+@{
+    ViewBag.Title = "Return Stock Materials";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/Scripts/myscripts/adminreturnscripts_v0.0.1.js"></script>
+
+<h4>Returned Stocks</h4>
+
+<p>
+    <div class="row">
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    onclick="showNewRecordModal();">
+                New Return Material
+            </button>
+            <button type="button" class="btn btn-success" data-toggle="modal"
+                    onclick="return showExportModal();">
+                Show Data Export Options
+            </button>
+        </div>
+
+    </div>
+</p>
+<div class="row">
+    <div class="col-md-5">
+        <table class="table table-striped table-bordered table-hover" id="tblRetunedHeaders">
+            <thead bgcolor="lightblue">
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Returned Date
+                    </th>
+                    <th>
+                        Returned By
+                    </th>
+                    <th>
+                        Remarks
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="col-md-7">
+        <table class="table table-striped table-bordered table-hover" id="tblRetunedDetails">
+            <thead bgcolor="lightblue">
+                <tr>
+                    <th>
+                        MCT No
+                    </th>
+                    <th>
+                        Salvage
+                    </th>
+                    <th>
+                        Material
+                    </th>
+                    <th>
+                        Serial No
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total Amount
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@*NEW RECORD MODAL*@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="modal-title" id="myModalLabel">Returned Stock(s)</h4>
+                    </div>
+                    <div class="col-md-2 col-md-push-1">
+                        <p>
+                            <button type="button" class="btn btn-primary" id="btnAddRecMat" onclick="saveReturnedHeader();">Save</button>
+                        </p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="clearControls();">Close</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body small">
+                <form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6 style="color:blue;">Header</h6>
+                            </div>
+                            <div class="col-md-offset-6 col-md-3">
+                                <label for="ReturnedDate">Return Date: </label>
+                                <input type="date" class="form-control" id="ReturnedDate" style="min-width: 100%" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" style="padding-top:5px;">
+                                <input type="hidden" class="form-control" id="AcceptedById" placeholder="Id" disabled="disabled" />
+                                <label for="AcceptedBy">Accepted By: </label>
+                                <input type="text" class="form-control" id="AcceptedBy" placeholder="Accepted By" style="min-width: 100%" disabled="disabled" />
+                            </div>
+                            <div class="col-md-4">
+                                <input type="hidden" class="form-control" id="ReturnedById" />
+                                <label>Returned By:</label>&nbsp;<label> <input type="checkbox" id="chkIsConsumer" onclick="onChangeCheckBox();" style="padding:0;" /> Is Consumer?</label><br />
+                                <select id="cboReturnedBy" class="form-control select2 select2-hidden-accessible" style="min-width: 100%"></select>
+                                <input type="text" id="txtConsumerName" class="form-control" placeholder="Name" />
+                            </div>
+                            <div class="col-md-5" style="padding-top:5px;">
+                                <label for="Remarks">Remark: </label>
+                                <input type="text" class="form-control" id="Remarks" placeholder="Remarks" style="min-width: 100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <h6 style="color:blue;">Detail Entry</h6>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="MaterialType">MCT#.:</label>&nbsp;<label><input type="checkbox" id="chkIsSalvage" style="padding:0;" /> Salvage?</label>
+                                <input type="text" id="MCTNo" class="form-control" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="hidden" id="MaterialTypeId" />
+                                <label for="cboMaterialType">Select Material Type: </label>
+                                <select id="cboMaterialType" class="form-control select2 select2-hidden-accessible" onchange="return cboMaterialTypeOnChange();" style="min-width: 100%"></select>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="hidden" id="MaterialId" />
+                                <label for="cboMaterial">Select Material: </label>
+                                <select id="cboMaterial" class="form-control select2 select2-hidden-accessible" onchange="return cboMaterialOnChange();" style="min-width: 100%"></select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="SerialNo">Serial No.: </label>
+                                <input type="text" id="SerialNo" class="form-control" />
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="hidden" id="YearId" />
+                                <label for="cboYearValues">Select Year: </label>
+                                <select id="cboYearValues" class="form-control select2 select2-hidden-accessible" onchange="return cboYearCodeOnChange();" style="min-width: 100%"></select>
+                            </div>
+                            <div class="col-md-2" style="text-align:center;">
+                                <label for="RateAmount">Rate Amount </label>
+                                <input type="text" class="form-control" id="RateAmount" style="min-width: 100%; text-align:right;" onkeydown="numberWithCommas(this)" placeholder="0.00" />
+                            </div>
+                            <div class="col-md-2" style="text-align:center;">
+                                <label for="Quantity">QTY </label>
+                                <input type="text" class="form-control" id="Quantity" style="min-width: 100%; text-align:center;" onkeypress="return isNumber(event)" onchange="computeTAmount();" placeholder="0" />
+                            </div>
+                            <div class="col-md-2" style="text-align:center;">
+                                <label for="TotalAmount">Total Amount </label>
+                                <input type="text" class="form-control" id="TotalAmount" style="min-width: 100%; text-align:right;" onkeydown="numberWithCommas(this)" placeholder="0.00" disabled="disabled" />
+                            </div>
+                            <div class="col-md-2" style="padding-top:22px;">
+                                <button type="button" class="btn btn-success" id="btnAddMaterialItem" onclick="addMaterialItem();">Add Material</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <table class="table table-striped table-bordered table-hover" id="tblMDetails" style="padding-left:10px;padding-right:10px;">
+                        <thead bgcolor="lightblue">
+                            <tr>
+                                <th style="text-align:center;">
+                                    MCT NO
+                                </th>
+                                <th style="text-align:center;">
+                                    Salvage
+                                </th>
+                                <th style="text-align:center;display:none;">
+                                    Material Id
+                                </th>
+                                <th style="text-align:center;">
+                                    Material
+                                </th>
+                                <th style="text-align:center;display:none;">
+                                    Year Id
+                                </th>
+                                <th style="text-align:center;">
+                                    Years Value
+                                </th>
+                                <th style="text-align:center;">
+                                    Serial No
+                                </th>
+                                <th style="text-align:center;">
+                                    Amount
+                                </th>
+                                <th style="text-align:center;">
+                                    Quantity
+                                </th>
+                                <th style="text-align:center;">
+                                    Total Amount
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbodydetail"></tbody>
+                    </table>
+                </form>
+
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+@*EXPORT MODAL*@
+<div class="modal fade" id="myExportModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myExportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="overflow-y: initial !important; width:1250px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">X</button>
+                <h4 class="modal-title" id="myExportModalLabel">EXPORT DATA BY DATE RANGE</h4>
+            </div>
+            <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto; ">
+                @* DATE SELECTION HERE AND FETCH BUTTON *@
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>DATE FROM:</label>
+                        <input type="date" class="form-control" id="dtpDateFr" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>DATE TO:</label>
+                        <input type="date" class="form-control" id="dtpDateTo" />
+                    </div>
+                    <div class="col-md-4" style="padding-top:1.8em;">
+                        <button type="button" class="btn btn-info" onclick="fetchdata();">
+                            <span><i class="glyphicon glyphicon-play">FETCH DATA</i></span>
+                        </button>
+                    </div>
+                </div>
+                <hr />
+                @* TABLE HERE *@
+                <div class="row">
+                    <div class="table-responsive-sm">
+                        <table class"table table-striped table-bordered table-hover" id="tblExport">
+                            <thead>
+                                <tr>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeExportModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalLoading" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="spin-container">
+            <div class="spin" id="loader"></div>
+            <div class="spin" id="loader2"></div>
+            <div class="spin" id="loader3"></div>
+            <div class="spin" id="loader4"></div>
+            <span id="spintext">LOADING...</span>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            loadreturnedheaders();
+        });
+    </script>
+}

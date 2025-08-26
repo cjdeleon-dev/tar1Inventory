@@ -1,0 +1,232 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3D50FEAE-42D8-42CF-A451-EEF63DA00B60}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TAR1DPWHDATA</RootNamespace>
+    <AssemblyName>TAR1DPWHDATA</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SecureLib11">
+      <HintPath>..\SecureLib11.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAccesses\AccountAccess\AccountAccess.cs" />
+    <Compile Include="DataAccesses\AccountAccess\IAccountAccess.cs" />
+    <Compile Include="DataAccesses\AuthenticationAccess\AuthenticationAccess.cs" />
+    <Compile Include="DataAccesses\AuthenticationAccess\IAuthenticationAccess.cs" />
+    <Compile Include="DataAccesses\ChargeAccess\ChargeAccess.cs" />
+    <Compile Include="DataAccesses\ChargeAccess\IChargeAccess.cs" />
+    <Compile Include="DataAccesses\ConnectionAccess.cs" />
+    <Compile Include="DataAccesses\DepartmentAccess\DepartmentAccess.cs" />
+    <Compile Include="DataAccesses\DepartmentAccess\IDepartmentAccess.cs" />
+    <Compile Include="DataAccesses\JOWOMOAccess\IJOWOMOAccess.cs" />
+    <Compile Include="DataAccesses\JOWOMOAccess\JOWOMOAccess.cs" />
+    <Compile Include="DataAccesses\MaterialAccess\IMaterialAccess.cs" />
+    <Compile Include="DataAccesses\MaterialAccess\MaterialAccess.cs" />
+    <Compile Include="DataAccesses\PositionAccess\IPositionAccess.cs" />
+    <Compile Include="DataAccesses\PositionAccess\PositionAccess.cs" />
+    <Compile Include="DataAccesses\ReceiveMaterialAccess\IReceiveMaterialAccess.cs" />
+    <Compile Include="DataAccesses\ReceiveMaterialAccess\ReceiveMaterialAccess.cs" />
+    <Compile Include="DataAccesses\RoleAccess\IRoleAccess.cs" />
+    <Compile Include="DataAccesses\RoleAccess\RoleAccess.cs" />
+    <Compile Include="DataAccesses\SupplierAccess\ISupplierAccess.cs" />
+    <Compile Include="DataAccesses\SupplierAccess\SupplierAccess.cs" />
+    <Compile Include="DataAccesses\UnitAccess\IUnitAccess.cs" />
+    <Compile Include="DataAccesses\UnitAccess\UnitAccess.cs" />
+    <Compile Include="DataAccesses\UserAccess\IUserAccess.cs" />
+    <Compile Include="DataAccesses\UserAccess\UserAccess.cs" />
+    <Compile Include="DataModels\ChangePasswordModel.cs" />
+    <Compile Include="DataModels\ChargeMaterialDetailModel.cs" />
+    <Compile Include="DataModels\ChargeMaterialDetailViewModel.cs" />
+    <Compile Include="DataModels\ChargeMaterialHeaderModel.cs" />
+    <Compile Include="DataModels\ChargeMaterialHeaderViewModel.cs" />
+    <Compile Include="DataModels\DepartmentModel.cs" />
+    <Compile Include="DataModels\DepartmentViewModel.cs" />
+    <Compile Include="DataModels\EmployeeModel.cs" />
+    <Compile Include="DataModels\EmployeeViewModel.cs" />
+    <Compile Include="DataModels\JOWOMOModel.cs" />
+    <Compile Include="DataModels\JOWOMOViewModel.cs" />
+    <Compile Include="DataModels\MaterialTypeModel.cs" />
+    <Compile Include="DataModels\MCTExportModel.cs" />
+    <Compile Include="DataModels\PositionModel.cs" />
+    <Compile Include="DataModels\PositionViewModel.cs" />
+    <Compile Include="DataModels\ProcessViewModel.cs" />
+    <Compile Include="DataModels\MaterialModel.cs" />
+    <Compile Include="DataModels\MaterialViewModel.cs" />
+    <Compile Include="DataModels\ReceiveMaterialBalanceDetailViewModel.cs" />
+    <Compile Include="DataModels\ReceiveMaterialBalanceDetailModel.cs" />
+    <Compile Include="DataModels\ReceiveMaterialDetailModel.cs" />
+    <Compile Include="DataModels\ReceiveMaterialDetailViewModel.cs" />
+    <Compile Include="DataModels\ReceiveMaterialHeaderModel.cs" />
+    <Compile Include="DataModels\ReceiveMaterialHeaderViewModel.cs" />
+    <Compile Include="DataModels\ReturnedStockDetailModel.cs" />
+    <Compile Include="DataModels\ReturnedStockHeaderModel.cs" />
+    <Compile Include="DataModels\RoleModel.cs" />
+    <Compile Include="DataModels\RoleViewModel.cs" />
+    <Compile Include="DataModels\RRExportModel.cs" />
+    <Compile Include="DataModels\SupplierModel.cs" />
+    <Compile Include="DataModels\SupplierViewModel.cs" />
+    <Compile Include="DataModels\UnitModel.cs" />
+    <Compile Include="DataModels\UnitViewModel.cs" />
+    <Compile Include="DataModels\UserLoginModel.cs" />
+    <Compile Include="DataModels\UserLoginViewModel.cs" />
+    <Compile Include="DataModels\UserModel.cs" />
+    <Compile Include="DataModels\UserViewModel.cs" />
+    <Compile Include="DataModels\YearValueModel.cs" />
+    <Compile Include="DataServices\AccountService\AccountService.cs" />
+    <Compile Include="DataServices\AccountService\IAccountService.cs" />
+    <Compile Include="DataServices\AuthenticationService\AuthenticationService.cs" />
+    <Compile Include="DataServices\AuthenticationService\IAuthenticationService.cs" />
+    <Compile Include="DataServices\ChargeService\ChargeService.cs" />
+    <Compile Include="DataServices\ChargeService\IChargeService.cs" />
+    <Compile Include="DataServices\DepartmentService\DepartmentService.cs" />
+    <Compile Include="DataServices\DepartmentService\IDepartmentService.cs" />
+    <Compile Include="DataServices\JOWOMOService\IJOWOMOService.cs" />
+    <Compile Include="DataServices\JOWOMOService\JOWOMOService.cs" />
+    <Compile Include="DataServices\MaterialService\IMaterialService.cs" />
+    <Compile Include="DataServices\MaterialService\MaterialService.cs" />
+    <Compile Include="DataServices\PositionService\IPositionService.cs" />
+    <Compile Include="DataServices\PositionService\PositionService.cs" />
+    <Compile Include="DataServices\ReceiveMaterialService\IReceiveMaterialService.cs" />
+    <Compile Include="DataServices\ReceiveMaterialService\ReceiveMaterialService.cs" />
+    <Compile Include="DataServices\RoleService\IRoleService.cs" />
+    <Compile Include="DataServices\RoleService\RoleService.cs" />
+    <Compile Include="DataServices\SupplierService\ISupplierService.cs" />
+    <Compile Include="DataServices\SupplierService\SupplierService.cs" />
+    <Compile Include="DataServices\UnitService\IUnitService.cs" />
+    <Compile Include="DataServices\UnitService\UnitService.cs" />
+    <Compile Include="DataServices\UserService\IUserService.cs" />
+    <Compile Include="DataServices\UserService\UserService.cs" />
+    <Compile Include="Enums\UserLevel.cs" />
+    <Compile Include="Filters\AdminAuthentication.cs" />
+    <Compile Include="Filters\UserAuthentication.cs" />
+    <Compile Include="Globals\GlobalVars.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\AccountQueries\AccountQueries.cs" />
+    <Compile Include="Queries\AuthenticationQueries\AuthenticationQueries.cs" />
+    <Compile Include="Queries\ChargeQueries\ChargeQueries.cs" />
+    <Compile Include="Queries\DepartmentQueries\DepartmentQueries.cs" />
+    <Compile Include="Queries\JOWOMOQueries\JOWOMOQueries.cs" />
+    <Compile Include="Queries\MaterialQueries\MaterialQueries.cs" />
+    <Compile Include="Queries\PositionQueries\PositionQueries.cs" />
+    <Compile Include="Queries\ReceiveMaterialQueries\ReceivedMaterialQueries.cs" />
+    <Compile Include="Queries\RoleQueries\RoleQueries.cs" />
+    <Compile Include="Queries\SupplierQueries\SupplierQueries.cs" />
+    <Compile Include="Queries\UnitQueries\UnitQueries.cs" />
+    <Compile Include="Queries\UserQueries\UserQueries.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54107</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54107/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

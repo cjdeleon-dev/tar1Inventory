@@ -1,0 +1,85 @@
+﻿@model IPagedList<TAR1DPWHDATA.DataModels.MaterialModel>
+
+@{
+    ViewBag.Title = "Stocks";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using PagedList;
+@using PagedList.Mvc;
+
+<script src="~/Scripts/myscripts/adminmaterialscripts.js"></script>
+
+<link href="~/Content/mystyles/mydatatable.css" rel="stylesheet" />
+
+<h4>Stocks</h4>
+
+<p>
+    <div class="row">
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" 
+                    onclick="clearAllTextBoxes();">Add Material</button><br />
+        </div>
+        @using (Html.BeginForm("ExportToExcel", "Materials", FormMethod.Post))
+        {
+            <div class="col-lg-3 col-lg-offset-3 ">
+                <input type="submit" value="Export" class="btn btn-warning" />
+            </div>
+        }
+        </div>
+</p>
+
+<div class="table-responsive-sm">
+    <table class="table table-hover table-bordered" id="myTable1">
+        <thead  bgcolor="lightblue">
+            <tr>
+                <th scope="col" style="text-align:center;">Material</th>
+                <th scope="col" style="text-align:center;">Description</th>
+                <th scope="col" style="text-align:center;">On Hand</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">X</button>
+                <h4 class="modal-title" id="myModalLabel">Adding New Material</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="Id">ID: </label>
+                            <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Material">Material: </label>
+                            <input type="text" class="form-control" id="Material" placeholder="Material" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description: </label>
+                            <input type="text" class="form-control" id="Description" placeholder="Description" style="min-width: 100%" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAddMaterial" onclick="addMaterial();">Add</button>
+                @*<button type="button" class="btn btn-primary" id="btnUpdateMaterial" style="display:none;" onclick="updateMaterial();">Update</button>*@
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(loadProcess());
+    </script>
+}

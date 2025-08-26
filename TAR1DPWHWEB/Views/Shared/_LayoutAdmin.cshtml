@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Warehouse Inventory</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+
+    @* CSS FILES FOR JQUERY DATATABLE*@
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+    @*<link href="~/Content/mystyles/mydatatable.css" rel="stylesheet" />*@
+    <link href="~/Content/mystyles/mystyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid body-content">
+        <div class="row" style="padding-top:50px;">
+            <div class="col-md-2" style="padding:0;">
+                <div class="vertical-menu" style="border-radius:10px;">
+                    <a href="@Url.Action("Dashboard","Account")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Dashboard" ? "active" : "")" id="mnuindex"><i class="glyphicon glyphicon-dashboard"></i> Dashboard</a>
+                    <a href="@Url.Action("ChangePassword","Account")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "ChangePassword" ? "active" : "")" id="mnuchpass"><i class="glyphicon glyphicon-lock"></i> Change Password</a>
+                    <a href="@Url.Action("UserList","Users")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "UserList" ? "active" : "")" id="mnuusers"><i class="glyphicon glyphicon-user"></i> Users</a>
+                    <a href="@Url.Action("Suppliers","Supplier")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Suppliers" ? "active" : "")" id="mnusuppliers"><i class="glyphicon glyphicon-subtitles"></i> Suppliers</a>
+                    <a href="@Url.Action("MaterialList","Materials")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "MaterialList" ? "active" : "")" id="mnumtrl"><i class="glyphicon glyphicon-stats"></i> Stocks</a>
+                    <a href="@Url.Action("NonStockList","Materials")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "NonStockList" ? "active" : "")" id="mnunstock"><i class="glyphicon glyphicon-wrench"></i> Non-Stocks</a>
+                    <a href="@Url.Action("UnitList","Units")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "UnitList" ? "active" : "")" id="mnuunit"><i class="glyphicon glyphicon-star"></i> Units</a>
+                    <a href="@Url.Action("DepartmentList","Departments")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "DepartmentList" ? "active" : "")" id="mnudept"><i class="glyphicon glyphicon-unchecked"></i> Departments</a>
+                    <a href="@Url.Action("PositionList","Positions")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "PositionList" ? "active" : "")" id="mnupost"><i class="glyphicon glyphicon-flag"></i> Positions</a>
+                    <a href="@Url.Action("ReceivedMaterials","Receive")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "ReceivedMaterials" ? "active" : "")" id="mnurr"><i class="glyphicon glyphicon-download"></i> RR Stocks</a>
+                    <a href="@Url.Action("ChargedMaterials","Charge")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "ChargedMaterials" ? "active" : "")" id="mnumct"><i class="glyphicon glyphicon-upload"></i> MCT Stocks</a>
+                    <a href="@Url.Action("ReturnStockMaterials","Return")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "ReturnStockMaterials" ? "active" : "")" id="mnumcrt"><i class="glyphicon glyphicon-adjust"></i> MCRT Stocks</a>
+                    <a href="@Url.Action("Logout","Authentication")"><i class="glyphicon glyphicon-log-out"></i> Sign Out</a>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="main">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/DataTables/jszip.min.js"></script>
+    <script src="~/Scripts/DataTables/buttons.html5.min.js"></script>
+
+    @if (HttpContext.Current.User.IsInRole("Employee"))
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                $('#mnuusers').hide();
+                $('#mnudept').hide();
+                $('#mnupost').hide();
+            };
+        </script>
+    }
+
+</body>
+</html>

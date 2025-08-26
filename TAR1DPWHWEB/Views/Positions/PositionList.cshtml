@@ -1,0 +1,147 @@
+﻿@model IPagedList<TAR1DPWHDATA.DataModels.PositionModel>
+
+@{
+    ViewBag.Title = "Positions";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using PagedList;
+@using PagedList.Mvc;
+
+<script src="~/Scripts/myscripts/adminpositionscripts.js"></script>
+
+<h4>Positions</h4>
+
+<p>
+    <div class="row">
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearAllTextBoxes();">Add Position</button><br />
+        </div>
+        <div class="col-lg-6"  style="padding:0;text-align:right;">
+            @using (Html.BeginForm("PositionList", "Positions", FormMethod.Get))
+            {
+            <div class="row">
+                <div class="col-md-offset-5 col-md-6">
+                    <div class="col-md-9" style="padding:0;">
+                        <input type="text" class="form-control" name="search" placeholder="Search Position Code" />
+                    </div>
+                    <div class="col-md-3" style="padding:0;text-align:left;">
+                        <button type="submit" class="btn btn-success" name="submit">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            }
+        </div>
+    </div>
+</p>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead bgcolor="lightblue">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Department)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody class="tbody">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+        <tr style="background-color: white;">
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                <a href="#" onclick="return getbyID(@item.Id);"><i class="glyphicon glyphicon-edit"></i></a>
+                <a href="#" onclick="return removePositionById(@item.Id);"><i class="glyphicon glyphicon-trash"></i></a>
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <tr style="background-color: red;">
+                <td colspan="3"><strong>No Records Found.</strong></td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <b>Total Record(s): @Model.TotalItemCount</b>
+        </div>
+        <div class="col-lg-6" style="text-align:right;">
+            @if (Model.PageCount < Model.PageNumber)
+            {
+                <b>Page 0 of 0</b>
+            }
+            else
+            {
+                <b>Page @Model.PageNumber of @Model.PageCount</b>
+            }
+        </div>
+    </div>
+    @Html.PagedListPager(Model, i => Url.Action("PositionList", "Positions", new { search = Request.QueryString["search"], i }))
+
+}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">X</button>
+                <h4 class="modal-title" id="myModalLabel">Adding New Position</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="Id">ID: </label>
+                            <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Code">Code: </label>
+                            <input type="text" class="form-control" id="Code" placeholder="Position Code" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description: </label>
+                            <input type="text" class="form-control" id="Description" placeholder="Description" style="min-width: 100%" />
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="DepartmentId" style="min-width: 100%" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Department">Department: </label>
+                            <select id="Department" class="form-control select2 select2-hidden-accessible" onchange="return cboDeptOnChange();" style="min-width: 100%"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAddPosition" onclick="addPosition();">Add</button>
+                <button type="button" class="btn btn-primary" id="btnUpdatePosition" style="display:none;" onclick="updatePosition();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
