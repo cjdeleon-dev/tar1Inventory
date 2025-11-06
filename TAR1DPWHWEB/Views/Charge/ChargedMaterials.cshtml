@@ -8,7 +8,7 @@
 @using PagedList;
 @using PagedList.Mvc;
 
-<script src="~/Scripts/myscripts/adminchargescripts_v1.1.5.js"></script>
+<script src="~/Scripts/myscripts/adminchargescripts_v1.1.6.js"></script>
 
 @*<link href="~/Content/mystyles/mydatatable.css" rel="stylesheet" />*@
 @*<link href="~/Content/PagedList.css" rel="stylesheet" />
@@ -116,7 +116,7 @@
                                 <div class="col-md-3">
                                     <input type="hidden" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
                                     <label for="PostedDate">Date: </label>
-                                    <input type="date" class="form-control" id="PostedDate" style="min-width: 100%" />
+                                    <input type="date" class="form-control" id="PostedDate" style="min-width: 100%" onkeypress="dtpOnKeyPress(event);" />
                                 </div>
                                 <div class="col-md-9">
                                     <input type="hidden" class="form-control" id="PostedById" placeholder="Id" disabled="disabled" />

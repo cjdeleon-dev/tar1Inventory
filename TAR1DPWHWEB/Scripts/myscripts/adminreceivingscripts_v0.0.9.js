@@ -35,7 +35,7 @@ function initDefaultFields() {
     //$('#NotedBy').val("TAL PLACIDO, RODOLFO R."); //default Rodolfo R. Tal Placido
     //$('#AuditedBy').val("ABOGADO, MELANIE A."); //default Melanie A. Abogado
 
-    $('#ReceivedById').val(332); //default Jerricko J. Tulabot
+    $('#ReceivedById').val(270); //default Joenacar B. Porlucas
     $('#NotedById').val(128); //default ENGR. RODOLFO R. TAL PLACIDO JR.
     $('#AuditedById').val(5); //default Melanie A. Abogado
     $('#CheckedById').val(212) //default ENGR. DANNY L. MALONZO  
@@ -130,7 +130,7 @@ function loadcboSig1() //RECIEVED BY
                 var opt = new Option(name, result[i].Id);
                 $('#ReceivedBy').append(opt);
             }
-            $('#ReceivedBy option[value=332]').attr('selected', 'selected');
+            $('#ReceivedBy option[value=270]').attr('selected', 'selected');
         },
         error: function (errormessage) {
             alert(errormessage.responseText);

@@ -225,10 +225,10 @@ function initDefaultFields() {
     $('#ConsumerReceivedBy').hide();
 
     $('#ReceivedById').val(0);
-    $('#IssuedById').val(332); //default Jerricko J. Tulabot
+    $('#IssuedById').val(270); //default Joenacar B. Porlucas
     $('#NotedById').val(317); //default Rodolfo R. Tal Placido
     $('#AuditedById').val(5); //default Melanie A. Abogado
-    $('#CheckedById').val(212) //default GUBAC, IVY MARIE D.  
+    $('#CheckedById').val(212) //default Danny Malonzo 
 
     $('#Project').val("");
     $('#ProjectAddress').val("");
@@ -346,7 +346,7 @@ function loadcboSig1() {
                 var opt = new Option(name, result[i].Id);
                 $('#IssuedBy').append(opt);
             }
-            $('#IssuedBy option[value=332]').attr('selected', 'selected');
+            $('#IssuedBy option[value=270]').attr('selected', 'selected');
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -792,6 +792,13 @@ function isNumber(evt) {
     if (evt.keyCode === 13) {
         evt.preventDefault();
         addMaterialItem();
+    }
+}
+
+function dtpOnKeyPress(evt) {
+    if (evt.keyCode === 13) {
+        evt.preventDefault();
+        document.getElementById("Project").focus();
     }
 }
 //-----------------------------------------------------------------------------------
