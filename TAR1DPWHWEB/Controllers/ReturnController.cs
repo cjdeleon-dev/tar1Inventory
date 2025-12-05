@@ -663,14 +663,14 @@ namespace TAR1DPWHWEB.Controllers
             using (SqlCommand cmd = new SqlCommand())
             {
                 SqlConnection con = new SqlConnection(constr);
-                SqlTransaction trans = null;
+                //SqlTransaction trans = null;
 
                 if (lst.Count() > 0)
                 {
                     con.Open();
-                    trans = con.BeginTransaction();
+                    //trans = con.BeginTransaction();
                     cmd.Connection = con;
-                    cmd.Transaction = trans;
+                    //cmd.Transaction = trans;
 
                     try
                     {
@@ -681,7 +681,7 @@ namespace TAR1DPWHWEB.Controllers
                             cmd.CommandText = "insert into returnedchargedMaterialdetails(ReturnedChargedHeaderId,MCTNo,MaterialId,serialno," +
                                               "approxyearid,rateamount,quantity,onhand,totalamount,issalvage) " +
                                               "values(@mcrtno,@mctno,@materialid,@serialno," +
-                                              "@yearid,@amount,@quantity,@quantity,@totalamount,@issalvage); ";
+                                              "@yearid,@amount,@quantity,@quantity,@totalamount,@issalvage);";
 
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@mcrtno", rm.MCRTNo);
@@ -702,17 +702,18 @@ namespace TAR1DPWHWEB.Controllers
                             cmd.ExecuteNonQuery();
                         }
 
-                        trans.Commit();
+                        //trans.Commit();
                         result = 1;
                     
                     }
                     catch (Exception ex)
                     {
-                        trans.Rollback();
+                        //trans.Rollback();
+                        result = 0;
                     }
                     finally
                     {
-                        trans.Dispose();
+                        //trans.Dispose();
                         con.Close();
                     }                    
                 }

@@ -464,6 +464,7 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\MyLocalHost.pubxml" />
     <None Include="Properties\PublishProfiles\WEBAPPHOST.pubxml" />
+    <None Include="Properties\PublishProfiles\WHDEMO.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
